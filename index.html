@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Line Bloom</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="play-area" aria-label="遊戲區">
+        <div class="topbar">
+          <div>
+            <h1>Line Bloom</h1>
+            <p>把扭曲的線稿慢慢整理回安靜的原貌。</p>
+          </div>
+          <button id="newGameButton" class="icon-button text-button" type="button">新局</button>
+        </div>
+
+        <div class="board-wrap">
+          <div id="targetPanel" class="target-panel" aria-label="原圖參考">
+            <span>原圖</span>
+            <div id="targetBoard" class="target-board"></div>
+          </div>
+
+          <div id="feedbackGlow" class="feedback-glow" aria-hidden="true"></div>
+          <div id="transformEffect" class="transform-effect" aria-hidden="true"></div>
+          <div id="gameBoard" class="game-board" aria-label="目前圖案"></div>
+        </div>
+
+        <div class="status-row">
+          <div>
+            <span class="status-label">進度</span>
+            <strong id="progressText">0%</strong>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <span id="progressMeter"></span>
+          </div>
+          <span id="roundText">第 1 輪</span>
+        </div>
+
+        <div id="cards" class="cards" aria-label="工具卡"></div>
+      </section>
+
+      <aside class="control-panel" aria-label="設定">
+        <div class="panel-group">
+          <label for="nameMode">卡片命名</label>
+          <select id="nameMode">
+            <option value="clear">顯示效果名稱</option>
+            <option value="hidden">顯示模糊名稱</option>
+          </select>
+        </div>
+
+        <div class="panel-group">
+          <label for="infoMode">回饋資訊</label>
+          <select id="infoMode">
+            <option value="number">看得到數字</option>
+            <option value="pulse">只看紅綠光</option>
+            <option value="image">只看圖片</option>
+          </select>
+        </div>
+
+        <div class="panel-group toggle-row">
+          <label for="targetToggle">原圖參考</label>
+          <input id="targetToggle" type="checkbox" checked />
+        </div>
+
+        <div class="panel-group toggle-row">
+          <label for="powerCardToggle">強力卡片</label>
+          <input id="powerCardToggle" type="checkbox" checked />
+        </div>
+
+        <div class="panel-group">
+          <label for="difficulty">初始變形次數 <span id="difficultyValue">12</span></label>
+          <input id="difficulty" type="range" min="6" max="24" value="12" />
+        </div>
+
+        <div class="panel-group">
+          <label for="seedInput">種子</label>
+          <div class="seed-row">
+            <input id="seedInput" type="text" value="calm-001" />
+            <button id="randomSeedButton" class="icon-button" type="button" title="隨機種子">↻</button>
+          </div>
+        </div>
+
+        <div class="panel-group">
+          <label for="imageUrlInput">原圖來源 URL</label>
+          <div class="seed-row">
+            <input id="imageUrlInput" type="url" placeholder="https://example.com/image.png" />
+            <button id="applyImageUrlButton" class="icon-button text-button" type="button">套用</button>
+          </div>
+        </div>
+
+        <div class="panel-group">
+          <label for="imageFileInput">本機圖片</label>
+          <input id="imageFileInput" class="file-input" type="file" accept="image/*" />
+          <button id="defaultImageButton" class="icon-button text-button" type="button">使用內建圖</button>
+        </div>
+
+        <div class="rules">
+          <h2>工具池</h2>
+          <p>基礎工具包含整體、九宮格、列欄與局部變換，工具池超過 100 張。強力工具會在後期把補救修正即時合成。</p>
+        </div>
+      </aside>
+    </main>
+
+    <template id="tileTemplate">
+      <div class="tile">
+        <div class="tile-art"></div>
+      </div>
+    </template>
+
+    <script src="game.js"></script>
+  </body>
+</html>
